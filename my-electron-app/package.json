@@ -1,15 +1,17 @@
 {
-  "name": "my-electron-app",
+  "name": "tutorial",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "electron": "^34.2.0"
-  }
+  "devDependencies": {
+    "electron": "^10.1.6"
+  },
+  "dependencies": {},
+  "description": ""
 }
