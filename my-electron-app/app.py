@@ -23,4 +23,4 @@ def index():
     return jsonify(server_greet = greeting)
 
 if __name__ == '__main__':
-    app.run( host='192.168.3.17', port = 5000, debug=True)
+    app.run( host='172.16.213.108', port = 65432, debug=True)
