@@ -5,19 +5,6 @@ HOST = "100.85.99.31" # Roy's Raspberry PI
 
 PORT = 65432          # Port to listen on (non-privileged ports are > 1023)
 
-def callback(data):
-    if data == '87':
-        # forward (w)
-        pass
-    elif data == '83':
-        # down (s)
-        pass
-    elif data == '65':
-        # left (a)
-        pass
-    elif data == '68':
-        # right (d)
-        pass
     
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
