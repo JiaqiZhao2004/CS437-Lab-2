@@ -19,7 +19,10 @@ function client(){
     
     // get the data from the server
     client.on('data', (data) => {
-        document.getElementById("bluetooth").innerHTML = data;
+        document.getElementById("temperature").innerHTML = data.cpu_temp;
+        document.getElementById("cpu_usage").innerHTML = data.cpu_usage;
+        document.getElementById("memory_usage").innerHTML = data.memory_usage;
+        document.getElementById("network_stats").innerHTML = data.network_stats;
         console.log(data.toString());
         client.end();
         client.destroy();

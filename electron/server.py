@@ -1,6 +1,6 @@
 import socket
 from time import sleep
-
+from system_stats import get_cpu_temperature, get_cpu_usage, get_memory_usage, get_network_stats
 from picarx import Picarx
 
 
@@ -40,6 +40,16 @@ def callback(px, data):
         sleep(0.3)
         px.stop()
 
+def get_data():
+    data = {
+        "cpu_temp": get_cpu_temperature(),
+        "cpu_usage": get_cpu_usage(),
+        "memory_usage": get_memory_usage(),
+        "network_stats": get_network_stats(),
+    }
+    return data
+
+
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -51,6 +61,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("server recv from: ", clientInfo)
             data = client.recv(1024)      # receive 1024 Bytes of message in binary format
             callback(px, data)
+            data = get_data()
+            client.sendall(str(data).encode())
+
   
     except:
         print("Closing socket")

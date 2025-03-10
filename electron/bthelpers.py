@@ -30,7 +30,10 @@ def set_target(target):
     target_name = target
 
 def send_data(data):
-    sock.send(json.dumps(data))
+    # sock.send(json.dumps(data))
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((HOST, PORT))
+        s.send(data.encode())  # send the encoded message (send in binary format)
 
 def terminate():
     sock.close()
