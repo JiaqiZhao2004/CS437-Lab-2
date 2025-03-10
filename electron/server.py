@@ -62,6 +62,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = client.recv(1024)      # receive 1024 Bytes of message in binary format
             callback(px, data)
             data = get_data()
+            print(data)
             client.sendall(str(data).encode())
 
   

@@ -19,11 +19,17 @@ function client(){
     
     // get the data from the server
     client.on('data', (data) => {
-        document.getElementById("temperature").innerHTML = data.cpu_temp;
-        document.getElementById("cpu_usage").innerHTML = data.cpu_usage;
-        document.getElementById("memory_usage").innerHTML = data.memory_usage;
-        document.getElementById("network_stats").innerHTML = data.network_stats;
-        console.log(data.toString());
+        try {
+            const parsedData = JSON.parse(data.toString());
+            document.getElementById("temperature").innerHTML = parsedData.cpu_temp;
+            document.getElementById("cpu_usage").innerHTML = parsedData.cpu_usage;
+            document.getElementById("memory_usage").innerHTML = parsedData.memory_usage;
+            document.getElementById("network_stats").innerHTML = parsedData.network_stats;
+            console.log('Received data:', parsedData);
+        } catch (error) {
+            console.error('Error parsing data:', error);
+            console.log('Raw data received:', data.toString());
+        }
         client.end();
         client.destroy();
     });
