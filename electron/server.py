@@ -39,6 +39,9 @@ def callback(px, data):
         px.forward(10)
         sleep(0.3)
         px.stop()
+    car_data = get_data()
+    print(car_data)
+    client.sendall(car_data)
 
 def get_data():
     data = {
@@ -48,7 +51,6 @@ def get_data():
         "network_stats": get_network_stats(),
     }
     return data
-
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -61,10 +63,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("server recv from: ", clientInfo)
             data = client.recv(1024)      # receive 1024 Bytes of message in binary format
             callback(px, data)
-            data = get_data()
-            print(data)
-            client.sendall(str(data).encode())
-
   
     except:
         print("Closing socket")
