@@ -34,29 +34,36 @@ function client(){
 
 // for detecting which key is been pressed w,a,s,d
 function updateKey(e) {
-
     e = e || window.event;
 
-    if (e.keyCode == '87') {
-        // up (w)
-        document.getElementById("upArrow").style.color = "green";
-        send_data("87");
-    }
-    else if (e.keyCode == '83') {
-        // down (s)
-        document.getElementById("downArrow").style.color = "green";
-        send_data("83");
-    }
-    else if (e.keyCode == '65') {
-        // left (a)
-        document.getElementById("leftArrow").style.color = "green";
-        send_data("65");
-    }
-    else if (e.keyCode == '68') {
-        // right (d)
-        document.getElementById("rightArrow").style.color = "green";
-        send_data("68");
-    }
+    const net = require('net');
+    const client = net.createConnection({ port: server_port, host: server_addr }, () => {
+        if (e.keyCode == '87') {
+            // up (w)
+            document.getElementById("upArrow").style.color = "green";
+            client.write(`87\r\n`);
+        }
+        else if (e.keyCode == '83') {
+            // down (s)
+            document.getElementById("downArrow").style.color = "green";
+            client.write(`83\r\n`);
+        }
+        else if (e.keyCode == '65') {
+            // left (a)
+            document.getElementById("leftArrow").style.color = "green";
+            client.write(`65\r\n`);
+        }
+        else if (e.keyCode == '68') {
+            // right (d)
+            document.getElementById("rightArrow").style.color = "green";
+            client.write(`68\r\n`);
+        }
+        client.end();
+    });
+
+    client.on('error', (err) => {
+        console.log('Error:', err);
+    });
 }
 
 // reset the key to the start state 
