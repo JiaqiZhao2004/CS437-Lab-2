@@ -92,5 +92,5 @@ function update_data(){
     setInterval(function(){
         // get image from python server
         client();
-    }, 50);
+    }, 2000);
 }

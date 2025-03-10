@@ -17,4 +17,4 @@ def get_memory_usage():
 
 def get_network_stats():
     net = psutil.net_io_counters()
-    return f"Sent: {net.bytes_sent / (1024 ** 2)} MB, Received: {net.bytes_recv / (1024 ** 2)} MB"
+    return f"Sent: {net.bytes_sent / (1024 ** 2):.2f} MB, Received: {net.bytes_recv / (1024 ** 2):.2f} MB"

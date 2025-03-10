@@ -1,4 +1,5 @@
 import socket
+import json
 from time import sleep
 from system_stats import get_cpu_temperature, get_cpu_usage, get_memory_usage, get_network_stats
 from picarx import Picarx
@@ -39,9 +40,6 @@ def callback(px, data):
         px.forward(10)
         sleep(0.3)
         px.stop()
-    car_data = get_data()
-    print(car_data)
-    client.sendall(car_data)
 
 def get_data():
     data = {
@@ -63,7 +61,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             print("server recv from: ", clientInfo)
             data = client.recv(1024)      # receive 1024 Bytes of message in binary format
             callback(px, data)
-  
+            data = get_data()
+            print(data)
+            client.sendall(json.dumps(data).encode())
+
     except:
         print("Closing socket")
         client.close()
